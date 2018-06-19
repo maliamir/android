@@ -5,6 +5,11 @@
 **NOTE:** This app uses **2 APIs**:
    1. http://api.walmartlabs.com/v1/stores?apiKey=YOUR_API_KEY&zip=06604&format=json       
         Register at https://developer.walmartlabs.com to get your API Key.
+      
+      then update it at:
+      https://github.com/maliameer/Capstone-Project/blob/master/Stage2/smart-shop/gradle.properties
+      
+      Before runnig the app.
    2. Google Cloud Engine - Endpoint API, developed for this app:
    
         https://smart-shop-206414.appspot.com/_ah/api/products/v1/search/2505   (POST URI)
