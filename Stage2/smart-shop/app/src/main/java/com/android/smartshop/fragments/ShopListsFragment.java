@@ -70,13 +70,21 @@ public class ShopListsFragment extends Fragment {
         final Context context = getContext();
         SmartShopService smartShopService = new SmartShopService();
 
-        boolean showMessage = false;
+        boolean hasStores = true, hasShopLists = false;
         TextView messageTv = view.findViewById(R.id.message_tv);
+
+        List<Store> stores = smartShopService.getStores(context);
+        if (stores == null || stores.isEmpty()) {
+            hasStores = false;
+        }
 
         List<ShopList> shopLists = smartShopService.getShopLists(context);
         if (shopLists != null && shopLists.size() > 0) {
 
+            hasShopLists = true;
             this.shopListsTbl.setVisibility(View.VISIBLE);
+            messageTv.setText(R.string.no_stores_list_message);
+
             for (int index = 0; index < shopLists.size(); index++) {
 
                 final ShopList shopList = shopLists.get(index);
@@ -101,7 +109,8 @@ public class ShopListsFragment extends Fragment {
                     }
 
                 });
-                if (showMessage) {
+
+                if (!hasStores) {
                     playListBtn.setEnabled(false);
                     playListBtn.setImageDrawable(getResources().getDrawable(R.drawable.unplay));
                 }
@@ -138,21 +147,9 @@ public class ShopListsFragment extends Fragment {
 
             }
 
-        } else {
-            showMessage = true;
         }
 
-        if (!showMessage) {
-
-            List<Store> stores = new SmartShopService().getStores(context);
-            if (stores == null || stores.isEmpty()) {
-                showMessage = true;
-                messageTv.setText(R.string.no_stores_list_message);
-            }
-
-        }
-
-        if (showMessage) {
+        if (!hasStores || !hasShopLists) {
             messageTv.setVisibility(View.VISIBLE);
         }
 
