@@ -16,7 +16,7 @@
         
         Above end-point underneath calls Walmart Mobile API to search products like:  
         
-        http://search.mobile.walmart.com/search?query=breadr&store=2505     
+        http://search.mobile.walmart.com/search?query=bread&store=2505     
         
         Why above API is not used directly is explained in ["Capstone Project 1"](https://github.com/maliameer/Capstone-Project/blob/master/Capstone_Stage1.pdf)
      
