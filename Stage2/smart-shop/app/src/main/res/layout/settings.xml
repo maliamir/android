@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="left"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:layout_marginLeft="@dimen/size_20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/limit"
+            android:textSize="@dimen/text_size_16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/default_limit_et"
+            android:layout_width="@dimen/size_50dp"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="left"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:layout_marginLeft="@dimen/size_20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sort_order"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/items_sort_order_attr"
+            android:layout_width="@dimen/size_140dp"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/highest_ratings_attr">
+
+            <RadioButton
+                android:id="@+id/highest_ratings_setting"
+                android:layout_width="@dimen/size_140dp"
+                android:layout_height="wrap_content"
+                android:text="@string/highest_ratings"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <RadioButton
+                android:id="@+id/lowest_price_setting"
+                android:layout_width="@dimen/size_140dp"
+                android:layout_height="wrap_content"
+                android:text="@string/lowest_price"
+                android:textSize="@dimen/text_size_14sp" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/save_settings_btn"
+        android:layout_width="@dimen/size_120dp"
+        android:layout_height="@dimen/size_30dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/save_settings"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_16sp"
+        android:layout_marginLeft="@dimen/size_20dp"
+        android:layout_marginTop="@dimen/size_30dp"/>
+
+</LinearLayout>

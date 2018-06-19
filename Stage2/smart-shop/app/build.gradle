@@ -1,0 +1,78 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.cloud.tools.endpoints-framework-client'
+
+buildscript {
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.google.cloud.tools:endpoints-framework-gradle-plugin:1.0.2'
+    }
+
+}
+
+android {
+
+    compileSdkVersion 26
+    buildToolsVersion "26.0.3"
+
+    /*
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    */
+
+    defaultConfig {
+        applicationId "com.android.smartshop"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField("String", "WALMART_API_KEY", WALMART_API_KEY)
+        buildConfigField("String", "WALMART_STORES_API_URL", WALMART_STORES_API_URL)
+        buildConfigField("String", "GOOGLE_APP_ENGINE_PRODUCTS_SEARCH_URL", GOOGLE_APP_ENGINE_PRODUCTS_SEARCH_URL)
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+
+    compile 'com.google.code.gson:gson:2.7'
+
+    compile 'android.arch.lifecycle:extensions:1.0.0-rc1';
+    compile 'android.arch.persistence.room:runtime:1.0.0-rc1';
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    endpointsServer project(path: ':backend', configuration: 'endpoints')
+
+    implementation 'com.google.api-client:google-api-client:1.23.0'
+    implementation 'com.google.http-client:google-http-client-android:1.23.0'
+
+    compile 'com.android.support:recyclerview-v7:25.0.1'
+    //compile 'com.android.support:multidex:1.0.3'
+
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
+    compile 'com.android.support:support-v4:26.1.0'
+
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    annotationProcessor 'android.arch.lifecycle:compiler:1.0.0-rc1';
+    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0-rc1';
+
+}

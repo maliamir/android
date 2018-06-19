@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/stores_actions"
+        android:contentDescription="@string/stores"
+        android:icon="@drawable/ic_stores"
+        android:tooltipText="@string/shop_lists"
+        android:title="@string/stores" />
+
+    <item
+        android:id="@+id/shop_lists_action"
+        android:contentDescription="@string/shop_lists"
+        android:icon="@drawable/ic_shop_lists"
+        android:tooltipText="@string/shop_lists"
+        android:title="@string/shop_lists" />
+
+    <item
+        android:id="@+id/add_shop_list_action"
+        android:contentDescription="@string/add_shop_list"
+        android:icon="@drawable/ic_add_shop_list"
+        android:tooltipText="@string/add_shop_list"
+        android:title="@string/add_shop_list" />
+
+    <item
+        android:id="@+id/settings_action"
+        android:contentDescription="@string/settings"
+        android:icon="@drawable/ic_settings"
+        android:tooltipText="@string/settings"
+        android:title="@string/settings" />
+
+</menu>
