@@ -4,10 +4,10 @@
 
     <item
         android:id="@+id/stores_actions"
-        android:contentDescription="@string/stores"
+        android:contentDescription="@string/favorite_stores"
         android:icon="@drawable/ic_stores"
         android:tooltipText="@string/shop_lists"
-        android:title="@string/stores" />
+        android:title="@string/favorite_stores" />
 
     <item
         android:id="@+id/shop_lists_action"

@@ -2,6 +2,7 @@ package com.android.smartshop.activity;
 
 import java.lang.reflect.Field;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -26,10 +27,12 @@ import com.android.smartshop.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String FRAGMENT_INDEX = "FRAGMENT_INDEX";
+
     private void disableShiftMode() {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
-        BottomNavigationMenuView bottomNavigationMenuView = (BottomNavigationMenuView)bottomNavigationView.getChildAt(0);
+        BottomNavigationMenuView bottomNavigationMenuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
         try {
 
             Field shiftingMode = bottomNavigationMenuView.getClass().getDeclaredField("mShiftingMode");
@@ -57,50 +60,63 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final StoreListsFragment storesFragment = StoreListsFragment.newInstance();
         final ShopListsFragment shopListsFragment = ShopListsFragment.newInstance();
+        Fragment fragment = shopListsFragment;
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                    Fragment selectedFragment = null;
-                    switch (item.getItemId()) {
+                Fragment selectedFragment = null;
+                switch (item.getItemId()) {
 
-                        case R.id.add_shop_list_action:
-                            selectedFragment = ShopListDetailFragment.newInstance();
-                            break;
+                    case R.id.add_shop_list_action:
+                        selectedFragment = ShopListDetailFragment.newInstance();
+                        break;
 
-                        case R.id.shop_lists_action:
-                            selectedFragment = shopListsFragment;
-                            break;
+                    case R.id.shop_lists_action:
+                        selectedFragment = shopListsFragment;
+                        break;
 
-                        case R.id.stores_actions:
-                            selectedFragment = StoreListsFragment.newInstance();
-                            break;
+                    case R.id.stores_actions:
+                        selectedFragment = storesFragment;
+                        break;
 
-                        case R.id.settings_action:
-                            selectedFragment = SettingsFragment.newInstance();
+                    case R.id.settings_action:
+                        selectedFragment = SettingsFragment.newInstance();
 
-                            break;
-
-                    }
-
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_layout, selectedFragment);
-                    transaction.commit();
-                    return true;
+                        break;
 
                 }
 
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, selectedFragment);
+                transaction.commit();
+                return true;
+
+            }
+
         });
 
+        Intent intent = getIntent();
+        Integer fragmentIndex = 1;
+        if (intent != null) {
+
+            fragmentIndex = intent.getIntExtra(FRAGMENT_INDEX, 1);
+            if (fragmentIndex == 0) {
+                fragment = storesFragment;
+            }
+
+        }
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, shopListsFragment);
+        transaction.replace(R.id.frame_layout, fragment);
         transaction.commit();
 
-        bottomNavigationView.getMenu().getItem(1).setChecked(true);
+        bottomNavigationView.getMenu().getItem(fragmentIndex).setChecked(true);
         this.disableShiftMode();
 
     }

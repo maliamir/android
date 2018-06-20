@@ -5,7 +5,7 @@
     android:initialLayout="@layout/smart_shop_widget_items"
     android:minHeight="110dp"
     android:minWidth="250dp"
-    android:previewImage="@drawable/smart_shop"
+    android:previewImage="@mipmap/launcher_icon"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="864000000"
     android:widgetCategory="home_screen"/>
