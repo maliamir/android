@@ -35,7 +35,7 @@
 * **Shop Lists** screen which allows to List all currently added Shop Lists in the app.
 ![shop lists](https://user-images.githubusercontent.com/15310615/41610585-42fafe30-73b3-11e8-82e6-92496d70be71.png)
 
-* **Products Search by each Item** screen which gets opened by clicking "**Play**" icon from the Shop List screen against a particular Shop List which then searches Products against each item in the Shop.
+* **Products Search by each Item** screen which gets opened by clicking "**Play**" icon from the Shop List screen against a particular Shop List which then searches Products against each item in the Shop List.
 
 ![products search](https://user-images.githubusercontent.com/15310615/41610603-48e0c0f0-73b3-11e8-815d-952089c2ba73.png)
 
