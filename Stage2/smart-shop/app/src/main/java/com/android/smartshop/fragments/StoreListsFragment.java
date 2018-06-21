@@ -115,9 +115,7 @@ public class StoreListsFragment extends Fragment {
                     String nearestZipCode = iterator.next();
                     System.out.println("Nearest Zip Code: " + nearestZipCode);
                     zipCodeEt.setText(nearestZipCode);
-
                     Toast.makeText(getContext(), nearestZipCode + " " + getString(R.string.zip_code_by_current_location_message), Toast.LENGTH_LONG).show();
-
                     searchStores(nearestZipCode);
 
                 }
@@ -137,7 +135,19 @@ public class StoreListsFragment extends Fragment {
 
                     @Override
                     public void onConnected(Bundle bundle) {
-                        loadNearbyZipCodes();
+
+                        try {
+                            loadNearbyZipCodes();
+                        } catch (Throwable throwable) {
+
+                            throwable.printStackTrace();
+                            System.out.println(throwable.getClass() + " has occurred. Now, attempting to request allowing access to the Location.");
+                            ActivityCompat.requestPermissions(getActivity(),
+                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                                    PERMISSION_REQUEST_ACCESS_LOCATIONS);
+
+                        }
+
                     }
 
                     @Override
