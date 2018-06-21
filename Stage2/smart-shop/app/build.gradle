@@ -19,18 +19,14 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.3"
 
-    /*
-    dexOptions {
-        javaMaxHeapSize "4g"
-    }
-    */
-
     defaultConfig {
         applicationId "com.android.smartshop"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+
+        multiDexEnabled true
 
         buildConfigField("String", "SMART_SHOP_AD_MOB_APP_ID", SMART_SHOP_AD_MOB_APP_ID)
 
@@ -77,7 +73,7 @@ dependencies {
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
 
     compile 'com.android.support:recyclerview-v7:26.0.1'
-    //compile 'com.android.support:multidex:1.0.3'
+    compile 'com.android.support:multidex:1.0.3'
 
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support:design:26.1.0'
