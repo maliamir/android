@@ -10,7 +10,7 @@
         android:orientation="horizontal"
         android:layout_gravity="left"
         android:layout_marginTop="@dimen/size_10dp"
-        android:layout_marginLeft="@dimen/size_20dp">
+        android:layout_marginStart="@dimen/size_20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
         android:orientation="horizontal"
         android:layout_gravity="left"
         android:layout_marginTop="@dimen/size_10dp"
-        android:layout_marginLeft="@dimen/size_20dp">
+        android:layout_marginStart="@dimen/size_20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -75,7 +75,7 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_16sp"
-        android:layout_marginLeft="@dimen/size_20dp"
+        android:layout_marginStart="@dimen/size_20dp"
         android:layout_marginTop="@dimen/size_30dp"/>
 
 </LinearLayout>

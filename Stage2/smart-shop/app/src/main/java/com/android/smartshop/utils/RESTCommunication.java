@@ -1,8 +1,6 @@
 package com.android.smartshop.utils;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 import org.apache.http.HttpResponse;
 
@@ -24,6 +22,8 @@ import android.widget.Toast;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+
+import com.android.smartshop.R;
 
 public final class RESTCommunication {
 
@@ -47,7 +47,7 @@ public final class RESTCommunication {
         }
 
         if (!isConnected) {
-            Toast.makeText(context, "Not Connected to the Network/Internet. Please connect then reload the Screen.", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, context.getString(R.string.no_network_connection_message), Toast.LENGTH_LONG).show();
         }
 
         return isConnected;

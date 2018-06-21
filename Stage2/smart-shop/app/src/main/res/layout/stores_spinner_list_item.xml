@@ -6,7 +6,7 @@
     android:layout_width="@dimen/size_320dp"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/size_10dp"
-    android:layout_marginLeft="@dimen/size_15dp"
+    android:layout_marginStart="@dimen/size_15dp"
     android:paddingLeft="@dimen/size_15dp"
     android:textSize="@dimen/text_size_16sp"
     tools:context="com.android.smartshop.activity.ProductsSearchActivity"/>

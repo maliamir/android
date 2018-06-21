@@ -22,7 +22,7 @@ public class Product {
         this.location = (aisle + " Section " + section);
 
         if (price > 0) {
-            this.price = new Double((((double)price) / 100));
+            this.price = (((double) price) / 100);
         }
 
         try {

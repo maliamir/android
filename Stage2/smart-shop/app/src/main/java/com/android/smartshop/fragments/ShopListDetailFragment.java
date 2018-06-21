@@ -121,11 +121,6 @@ public class ShopListDetailFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -222,12 +217,12 @@ public class ShopListDetailFragment extends Fragment {
                 }
 
                 if (listItems.isEmpty()) {
-                    Toast.makeText(getContext(), ("At least 1 Item needs to be added to save a Shop List."), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), (getString(R.string.item_required_in_shop_list_message)), Toast.LENGTH_LONG).show();
                 } else {
 
                     String name = shopListNameTf.getText().toString();
                     if (name.isEmpty()) {
-                        Toast.makeText(getContext(), "Please provide a name to the Shop List.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), getString(R.string.name_required_for_shop_list_message), Toast.LENGTH_LONG).show();
                     } else {
 
                         boolean isNew = false;
@@ -247,7 +242,7 @@ public class ShopListDetailFragment extends Fragment {
                             shopList = smartShopService.getShopListById(context, shopList.getShopListId());
                         }
 
-                        Toast.makeText(getContext(), ("Shop List \"" + shopList.getName() + "\" has been saved successfully."), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), (getString(R.string.shop_list) + " \"" + shopList.getName() + "\" " + getString(R.string.saved_message)), Toast.LENGTH_LONG).show();
                         System.out.println("Shop List:\n" + shopList);
 
                     }

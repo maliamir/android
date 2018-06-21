@@ -104,7 +104,7 @@ public class ProductsSearchActivity extends AppCompatActivity implements LoaderM
             Uri uri = Uri.parse(BuildConfig.GOOGLE_APP_ENGINE_PRODUCTS_SEARCH_URL).buildUpon().appendPath(this.walmartStoreId.toString()).build();
             jsonPayload = RESTCommunication.postPayload(uri, this.itemsRequestPayload);
         } catch (IOException ioe) {
-            Toast.makeText(this, ("Unable to search Products by each Item. Please try again."), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.unable_to_search_products_message), Toast.LENGTH_LONG).show();
             ioe.printStackTrace();
         }
 

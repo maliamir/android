@@ -3,6 +3,7 @@ package com.android.smartshop.activity;
 import java.lang.reflect.Field;
 
 import android.content.Intent;
+
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -17,12 +18,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import android.view.MenuItem;
+import android.view.View;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import com.android.smartshop.fragments.SettingsFragment;
 import com.android.smartshop.fragments.StoreListsFragment;
 import com.android.smartshop.fragments.ShopListsFragment;
 import com.android.smartshop.fragments.ShopListDetailFragment;
 
+import com.android.smartshop.BuildConfig;
 import com.android.smartshop.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,11 +61,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void loadAd() {
+
+        AdView adView = findViewById(R.id.ad_view);
+
+        try {
+
+            MobileAds.initialize(this, BuildConfig.SMART_SHOP_AD_MOB_APP_ID);
+            adView.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+
+        } catch (Throwable throwable) {
+
+            throwable.printStackTrace();
+            System.out.println(throwable.getClass() + " has occurred.");
+            adView.setVisibility(View.GONE);
+
+        }
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.loadAd();
 
         final StoreListsFragment storesFragment = StoreListsFragment.newInstance();
         final ShopListsFragment shopListsFragment = ShopListsFragment.newInstance();

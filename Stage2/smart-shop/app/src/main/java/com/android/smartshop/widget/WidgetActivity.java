@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
+
 import android.widget.TextView;
 
 import android.appwidget.AppWidgetManager;
@@ -25,12 +26,17 @@ import com.android.smartshop.activity.MainActivity;
 public class WidgetActivity extends Activity {
 
     int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+    private Intent detailsIntent;
+
+    private void setOkResult() {
+        setResult(RESULT_OK, detailsIntent);
+        finish();
+    }
 
     @Override
     public void onCreate(Bundle bundle) {
 
         super.onCreate(bundle);
-        setResult(RESULT_CANCELED);
 
         setContentView(R.layout.smart_shop_widget_items);
 
@@ -44,18 +50,18 @@ public class WidgetActivity extends Activity {
             finish();
         } else {
 
+            this.detailsIntent = new Intent(this, MainActivity.class);
+
             SmartShopService smartShopService = new SmartShopService();
             List<Store> stores = smartShopService.getStores(this);
             List<ShopList> shopLists = smartShopService.getShopLists(this);
-
-            final Intent detailsIntent = new Intent(this, MainActivity.class);
 
             View.OnClickListener widgetStoresTvOnClickListener = new View.OnClickListener() {
 
                 @Override
                 public void onClick(View view) {
                     detailsIntent.putExtra(MainActivity.FRAGMENT_INDEX, 0);
-                    startActivity(detailsIntent);
+                    setOkResult();
                 }
 
             };
@@ -64,7 +70,7 @@ public class WidgetActivity extends Activity {
                 @Override
                 public void onClick(View view) {
                     detailsIntent.putExtra(MainActivity.FRAGMENT_INDEX, 1);
-                    startActivity(detailsIntent);
+                    setOkResult();
                 }
 
             };

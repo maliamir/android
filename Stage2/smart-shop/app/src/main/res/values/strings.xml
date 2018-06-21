@@ -3,6 +3,7 @@
     <string name="app_name">Smart Shop</string>
 
     <string name="shop_lists">Shop Lists</string>
+    <string name="shop_list">Shop List</string>
     <string name="store_lists">Store Lists</string>
     <string name="items_list">Items List</string>
     <string name="add_shop_list">Add Shop List</string>
@@ -32,6 +33,22 @@
     <string name="save_settings">Save Settings</string>
     <string name="no_shop_lists_message">No Shop Lists are yet defined.</string>
     <string name="no_stores_list_message">To execute a Shop List requires at least 1 Favorite Store.</string>
+    <string name="no_stores_found_message">Unable to search Stores. Please try again.</string>
+    <string name="valid_zip_code_message">Please provide a valid 5 digits Zip Code.</string>
+    <string name="item_required_in_shop_list_message">At least 1 Item needs to be added to save a Shop List.</string>
+    <string name="name_required_for_shop_list_message">Please provide a name to the Shop List.</string>
+    <string name="saved_message">has been saved successfully.</string>
+    <string name="favorite_removed_message">has been removed successfully as Favorite Store.</string>
+    <string name="no_network_connection_message">Not Connected to the Network/Internet. Please connect then reload the Screen.</string>
+    <string name="already_added_as_favorite_message">already added as Favorite.</string>
+    <string name="favorite_added_message">has been added successfully as Favorite Store.</string>
+    <string name="unable_to_search_products_message">Unable to search Products by each Item. Please try again.</string>
+    <string name="settings_saved_message">Settings have been saved successfully.</string>
+    <string name="no_stores_found_against_zip_code_message">No Stores found against Zip Code</string>
+    <string name="enter_zip_code_message">Please try another Zip Code.</string>
+    <string name="invalid_zip_code">Invalid Zip Code</string>
+    <string name="retry_zip_code_message">Zip Code MUST BE 5 digits number. Please try again.</string>
+    <string name="zip_code_by_current_location_message">is the nearest Zip code as per your current location.</string>
 
     <!-- Content Descriptions -->
     <string name="product_image">Product Image</string>
@@ -41,5 +58,11 @@
     <string name="delete_list">Delete List</string>
     <string name="favorite">Mark Store as Favorite</string>
     <string name="unfavorite">Remove Store as Favorite</string>
+
+    <string name="google_services_api_key">AIzaSyC6iroMEuhkcIhaT682Pc8s6Z2tLP1iFWI</string>
+    <string name="app_banner_unit_1_id" translatable="false">ca-app-pub-3265025410386826/1516718739</string>
+
+    <!--string name="app_banner_unit_1_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string-->
+
 
 </resources>

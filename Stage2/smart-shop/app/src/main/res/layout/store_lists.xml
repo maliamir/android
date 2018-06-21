@@ -14,14 +14,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/size_10dp"
+            android:layout_marginEnd="@dimen/size_10dp"
             android:orientation="horizontal"
             android:paddingTop="@dimen/size_5dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_10dp"
+                android:layout_marginStart="@dimen/size_10dp"
                 android:text="Stores Zip Code"
                 android:textSize="@dimen/text_size_16sp"
                 android:textStyle="bold" />
@@ -30,7 +30,7 @@
                 android:id="@+id/zip_code_et"
                 android:layout_width="@dimen/size_70dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_10dp"
+                android:layout_marginStart="@dimen/size_10dp"
                 android:inputType="number"
                 android:maxLength="5" />
 
@@ -77,8 +77,8 @@
             android:id="@+id/store_lists_tbl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/size_5dp"
-            android:layout_marginRight="@dimen/size_5dp"
+            android:layout_marginStart="@dimen/size_5dp"
+            android:layout_marginEnd="@dimen/size_5dp"
             android:visibility="gone">
 
             <TableRow
@@ -107,8 +107,8 @@
             android:id="@+id/favorite_store_lists_tbl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/size_5dp"
-            android:layout_marginRight="@dimen/size_5dp"
+            android:layout_marginStart="@dimen/size_5dp"
+            android:layout_marginEnd="@dimen/size_5dp"
             android:layout_marginTop="@dimen/size_20dp"
             android:visibility="gone">
 

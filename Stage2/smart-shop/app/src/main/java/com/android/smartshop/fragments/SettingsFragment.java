@@ -33,11 +33,6 @@ public class SettingsFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -102,7 +97,7 @@ public class SettingsFragment extends Fragment {
                     setting.setSortOrder(sortOrder);
 
                     smartShopService.addSetting(context, setting);
-                    Toast.makeText(getContext(), ("Settings have been saved successfully."), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), getString(R.string.settings_saved_message), Toast.LENGTH_LONG).show();
                     System.out.println(setting);
 
                 } else {

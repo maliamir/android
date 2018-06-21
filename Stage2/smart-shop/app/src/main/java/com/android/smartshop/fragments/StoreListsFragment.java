@@ -1,5 +1,6 @@
 package com.android.smartshop.fragments;
 
+import java.util.Iterator;
 import java.util.Set;
 import java.util.List;
 import java.util.HashSet;
@@ -7,10 +8,13 @@ import java.util.LinkedList;
 
 import java.io.IOException;
 
+import android.Manifest;
 import android.content.Context;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -24,6 +28,15 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
+import com.google.android.gms.location.places.Places;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,12 +53,19 @@ import com.android.smartshop.R;
 
 public class StoreListsFragment extends Fragment {
 
+    private static final int PERMISSION_REQUEST_ACCESS_LOCATIONS = 1;
+
+    private Set<String> nearbyZipCodes;
+    private Set<Integer> storesSet = new HashSet<Integer>();
+
     private RelativeLayout storeLoadingRelativeLayout;
 
     private TableLayout storeListsTbl;
     private TableLayout favoriteStoreListsTbl;
 
-    private Set<Integer> storesSet = new HashSet<Integer>();
+    private TextView zipCodeEt;
+
+    private GoogleApiClient googleApiClient;
 
     private SmartShopService smartShopService;
 
@@ -53,9 +73,96 @@ public class StoreListsFragment extends Fragment {
         return new StoreListsFragment();
     }
 
+    private void loadNearbyZipCodes() {
+
+        PendingResult<PlaceLikelihoodBuffer> pendingResult = Places.PlaceDetectionApi.getCurrentPlace(googleApiClient, null);
+        pendingResult.setResultCallback(new ResultCallback<PlaceLikelihoodBuffer>() {
+
+            @Override
+            public void onResult(PlaceLikelihoodBuffer likelyPlaces) {
+
+                nearbyZipCodes = new HashSet<String>();
+
+                Status status = likelyPlaces.getStatus();
+                System.out.println("Likely Places Status Code: " + status.getStatusCode() + "; Message: " + status.getStatusMessage());
+
+                int likelyPlacesCount = likelyPlaces.getCount();
+                System.out.println(likelyPlacesCount + " Likely Places FOUND.");
+
+                for (int index = 0; index < likelyPlacesCount; index++) {
+
+                    Place place = likelyPlaces.get(index).getPlace();
+                    String placeAddress = place.getAddress().toString();
+                    //System.out.println((index + 1) + ". Places Address: " + placeAddress);
+
+                    String[] addresInfo = placeAddress.split(",");
+                    String zipCodeAndStateInfo = addresInfo[(addresInfo.length - 2)].trim();
+                    //System.out.println("\tZip Code and State Info: " + zipCodeAndStateInfo);
+
+                    String zipCode = zipCodeAndStateInfo.split(" ")[1];
+                    //System.out.println("\tZip Code: " + zipCode);
+
+                    nearbyZipCodes.add(zipCode);
+
+                }
+
+                likelyPlaces.release();
+                System.out.println("Nearby Zip Codes: " + nearbyZipCodes);
+
+                Iterator<String> iterator = null;
+                if (!nearbyZipCodes.isEmpty() && (iterator = nearbyZipCodes.iterator()).hasNext()) {
+
+                    String nearestZipCode = iterator.next();
+                    System.out.println("Nearest Zip Code: " + nearestZipCode);
+                    zipCodeEt.setText(nearestZipCode);
+
+                    Toast.makeText(getContext(), nearestZipCode + " " + getString(R.string.zip_code_by_current_location_message), Toast.LENGTH_LONG).show();
+
+                    searchStores(nearestZipCode);
+
+                }
+
+            }
+
+        });
+
+    }
+
+    private void connectToGooglePlacesApi() {
+
+        googleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+
+                    @Override
+                    public void onConnected(Bundle bundle) {
+                        loadNearbyZipCodes();
+                    }
+
+                    @Override
+                    public void onConnectionSuspended(int i) {
+
+                    }
+
+                }).build();
+        googleApiClient.connect();
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+
+        System.out.println("onRequestPermissionsResult called - requestCode: " + requestCode);
+        if (requestCode == PERMISSION_REQUEST_ACCESS_LOCATIONS && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            this.connectToGooglePlacesApi();
+        }
+
+    }
+
     private void deleteStore(View view) {
 
-        Store store = (Store)view.getTag();
+        Store store = (Store) view.getTag();
         System.out.println("Store to be deleted: " + store);
         if (store != null) {
 
@@ -64,14 +171,14 @@ public class StoreListsFragment extends Fragment {
 
                 smartShopService.deleteStore(getContext(), storeId);
 
-                this.favoriteStoreListsTbl.removeView(((TableRow)view.getParent()));
+                this.favoriteStoreListsTbl.removeView(((TableRow) view.getParent()));
                 this.favoriteStoreListsTbl.requestLayout();
 
                 if (this.favoriteStoreListsTbl.getChildCount() <= 1) {
                     this.favoriteStoreListsTbl.setVisibility(View.GONE);
                 }
 
-                Toast.makeText(getContext(), ("Store \"" + store.getName() + "\" has been removed successfully as Favorite Store."), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), (getString(R.string.store) + " \"" + store.getName() + "\" " + getString(R.string.favorite_removed_message)), Toast.LENGTH_LONG).show();
 
             }
 
@@ -104,8 +211,8 @@ public class StoreListsFragment extends Fragment {
         stringBuilder.append(store.getState()).append(", ");
         stringBuilder.append(store.getZipCode());
 
-        ((TextView)tableRow.findViewById(R.id.store_name_attr)).setText("    " + (count++) + ". " + store.getName());
-        ((TextView)tableRow.findViewById(R.id.store_address_details_attr)).setText(stringBuilder.toString());
+        ((TextView) tableRow.findViewById(R.id.store_name_attr)).setText("    " + (count++) + ". " + store.getName());
+        ((TextView) tableRow.findViewById(R.id.store_address_details_attr)).setText(stringBuilder.toString());
 
         table.addView(tableRow);
         table.requestLayout();
@@ -121,9 +228,9 @@ public class StoreListsFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
 
-                    Store selectedStore = (Store)view.getTag();
+                    Store selectedStore = (Store) view.getTag();
                     if (storesSet.contains(selectedStore.getWalmartStoreId())) {
-                        Toast.makeText(context, ("\"" + selectedStore.getName() + "\" already added as Favorite."), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, ("\"" + selectedStore.getName() + "\" " + getString(R.string.already_added_as_favorite_message)), Toast.LENGTH_LONG).show();
                     } else {
 
                         smartShopService.addStore(context, selectedStore);
@@ -135,7 +242,8 @@ public class StoreListsFragment extends Fragment {
 
                         favoriteStoreListsTbl.setVisibility(View.VISIBLE);
 
-                        Toast.makeText(getContext(), ("Store \"" + selectedStore.getName() + "\" has been added successfully as Favorite Store."), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), (getString(R.string.store) + " \"" + selectedStore.getName() + "\" " + getString(R.string.favorite_added_message)),
+                                Toast.LENGTH_LONG).show();
 
                     }
 
@@ -154,7 +262,7 @@ public class StoreListsFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
 
-                    Store selectedStore = (Store)view.getTag();
+                    Store selectedStore = (Store) view.getTag();
                     deleteStore(view);
                     storesSet.remove(selectedStore.getWalmartStoreId());
 
@@ -186,7 +294,7 @@ public class StoreListsFragment extends Fragment {
 
     }
 
-    private void searchStores(String zipCode){
+    private void searchStores(String zipCode) {
 
         RESTCommunication.setStrictMode();
         if (RESTCommunication.isConnected(getContext())) {
@@ -196,10 +304,11 @@ public class StoreListsFragment extends Fragment {
             this.cleanTable();
 
             String jsonPayload = null;
+            String noStoresFoundMessage = getString(R.string.no_stores_found_message);
             try {
                 jsonPayload = RESTCommunication.getJsonPayload((BuildConfig.WALMART_STORES_API_URL + BuildConfig.WALMART_API_KEY + "&zip=" + zipCode));
             } catch (IOException ioe) {
-                Toast.makeText(getContext(), ("Unable to search Stores. Please try again."), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), (noStoresFoundMessage), Toast.LENGTH_LONG).show();
             }
 
             boolean noStoresFound = false;
@@ -209,7 +318,7 @@ public class StoreListsFragment extends Fragment {
                 try {
                     jsonArray = new JSONArray(jsonPayload);
                 } catch (JSONException je) {
-                    Toast.makeText(getContext(), ("Unable to search Stores. Please try again."), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), (noStoresFoundMessage), Toast.LENGTH_LONG).show();
                     je.printStackTrace();
                 }
 
@@ -247,7 +356,8 @@ public class StoreListsFragment extends Fragment {
             }
 
             if (noStoresFound) {
-                Toast.makeText(getContext(), ("No Stores found against Zip Code \"" + zipCode + "\". Please try another Zip Code."), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), (getString(R.string.no_stores_found_against_zip_code_message) + " \"" + zipCode + "\". " +
+                        getString(R.string.enter_zip_code_message)), Toast.LENGTH_LONG).show();
             }
 
             this.storeLoadingRelativeLayout.setVisibility(View.GONE);
@@ -257,34 +367,41 @@ public class StoreListsFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.store_lists, container,false);
+        View view = inflater.inflate(R.layout.store_lists, container, false);
 
-        final TextView zipCodeEt = view.findViewById(R.id.zip_code_et);
+        this.zipCodeEt = view.findViewById(R.id.zip_code_et);
         Button searchStoresBtn = view.findViewById(R.id.search_stores_btn);
         this.storeLoadingRelativeLayout = view.findViewById(R.id.loading_stores_info_rl);
         this.storeListsTbl = view.findViewById(R.id.store_lists_tbl);
         this.favoriteStoreListsTbl = view.findViewById(R.id.favorite_store_lists_tbl);
+
+        try {
+            this.connectToGooglePlacesApi();
+        } catch (Throwable throwable) {
+
+            throwable.printStackTrace();
+            System.out.println(throwable.getClass() + " has occurred. Now, attempting to request allowing access to the Location.");
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    PERMISSION_REQUEST_ACCESS_LOCATIONS);
+
+        }
 
         searchStoresBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
-              String zipCode = zipCodeEt.getText().toString().trim();
-              if (zipCode.isEmpty()) {
-                  Toast.makeText(getContext(), ("Please provide a valid 5 digits Zip Code."), Toast.LENGTH_LONG).show();
-              } else if (zipCode.length() != 5) {
-                  Toast.makeText(getContext(), ("Invalid Zip Code \"" + zipCode + "\". Zip Code MUST BE 5 digits number. Please try again."), Toast.LENGTH_LONG).show();
-              } else {
-                  searchStores(zipCode);
-              }
+                String zipCode = zipCodeEt.getText().toString().trim();
+                if (zipCode.isEmpty()) {
+                    Toast.makeText(getContext(), (getString(R.string.valid_zip_code_message)), Toast.LENGTH_LONG).show();
+                } else if (zipCode.length() != 5) {
+                    Toast.makeText(getContext(), (getString(R.string.invalid_zip_code) + " \"" + zipCode + "\". " + getString(R.string.retry_zip_code_message)), Toast.LENGTH_LONG).show();
+                } else {
+                    searchStores(zipCode);
+                }
 
             }
 
