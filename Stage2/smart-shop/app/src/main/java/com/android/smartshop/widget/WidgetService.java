@@ -66,8 +66,8 @@ public class WidgetService extends RemoteViewsService {
 
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.smart_shop_widget_items);
 
-            remoteViews.setTextViewText(R.id.widget_stores, ("" + this.stores.size() + " Store(s)"));
-            remoteViews.setTextViewText(R.id.widget_shop_lists, ("" + this.shopLists.size() + " Shop List(s)"));
+            remoteViews.setTextViewText(R.id.widget_stores, ("" + this.stores.size() + " " + context.getString(R.string.stores_info)));
+            remoteViews.setTextViewText(R.id.widget_shop_lists, ("" + this.shopLists.size() + " " + context.getString(R.string.shop_lists_info)));
 
             return remoteViews;
 

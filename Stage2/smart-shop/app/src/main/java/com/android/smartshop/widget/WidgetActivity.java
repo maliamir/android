@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.android.smartshop.activity.MainActivity;
 public class WidgetActivity extends Activity {
 
     int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+
     private Intent detailsIntent;
 
     private void setOkResult() {
@@ -33,12 +35,31 @@ public class WidgetActivity extends Activity {
         finish();
     }
 
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+
+        public void onClick(View view) {
+
+            Context context = WidgetActivity.this;
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            SmartShopWidget.updateAppWidget(context, appWidgetManager, appWidgetId);
+
+            Intent resultValue = new Intent();
+            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            setResult(RESULT_OK, resultValue);
+            finish();
+
+        }
+
+    };
+
     @Override
     public void onCreate(Bundle bundle) {
 
         super.onCreate(bundle);
 
         setContentView(R.layout.smart_shop_widget_items);
+
+        findViewById(R.id.widget_container).setOnClickListener(onClickListener);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -84,6 +105,8 @@ public class WidgetActivity extends Activity {
             widgetShopListsTv.setText(("" + shopLists.size() + " Shop List(s)"));
             widgetShopListsTv.setOnClickListener(widgetShopListsOnClickListener);
             findViewById(R.id.widget_shop_lists_iv).setOnClickListener(widgetShopListsOnClickListener);
+
+            setOkResult();
 
         }
 

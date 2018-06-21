@@ -27,7 +27,7 @@ public final class ProductsResolver {
     private static Product getProductInstance(JSONObject productJsonObject) throws JSONException {
 
         Integer section = -1;
-        Long price = new Long(-1);
+        Long price = Long.valueOf(-1);
         String aisle = "N/A";
 
         JSONObject locationObject = productJsonObject.getJSONObject("location");

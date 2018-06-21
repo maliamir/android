@@ -14,11 +14,12 @@
             android:id="@+id/store_name_attr"
             android:layout_width="@dimen/size_345dp"
             android:layout_height="@dimen/size_25dp"
-            android:layout_gravity="left"
-            android:gravity="left"
-            android:paddingLeft="@dimen/size_10dp"
+            android:layout_gravity="start"
+            android:gravity="start"
+            android:paddingStart="@dimen/size_10dp"
+            android:paddingEnd="@dimen/size_1dp"
             android:paddingTop="@dimen/size_5dp"
-            android:text="Store name"
+            android:text="@string/store_name"
             android:textSize="@dimen/text_size_16sp"
             android:textStyle="bold" />
 
@@ -26,9 +27,9 @@
             android:id="@+id/store_address_details_attr"
             android:layout_width="@dimen/size_345dp"
             android:layout_height="@dimen/size_60dp"
-            android:layout_gravity="left"
-            android:gravity="left"
-            android:paddingLeft="@dimen/size_10dp"
+            android:layout_gravity="start"
+            android:gravity="start"
+            android:paddingStart="@dimen/size_10dp"
             android:text="@string/store_address_details"
             android:textSize="@dimen/text_size_16sp" />
 
@@ -45,6 +46,7 @@
         android:layout_height="@dimen/size_30dp"
         android:layout_marginEnd="@dimen/size_10dp"
         android:layout_marginTop="@dimen/size_20dp"
+        android:contentDescription="@string/store_action"
         android:src="@drawable/favorite" />
 
 </TableRow>

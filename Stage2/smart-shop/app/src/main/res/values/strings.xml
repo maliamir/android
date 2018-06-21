@@ -3,6 +3,7 @@
     <string name="app_name">Smart Shop</string>
 
     <string name="shop_lists">Shop Lists</string>
+    <string name="shop_lists_info">Shop List(s)</string>
     <string name="shop_list">Shop List</string>
     <string name="store_lists">Store Lists</string>
     <string name="items_list">Items List</string>
@@ -10,6 +11,7 @@
     <string name="settings">Settings</string>
 
     <string name="stores">Stores</string>
+    <string name="stores_info">Store(s)</string>
     <string name="favorite_stores">Favorite Stores</string>
 
     <string name="save_list">Save List</string>
@@ -21,14 +23,18 @@
     <string name="price">Price: </string>
     <string name="rating">Rating: </string>
     <string name="store">Store:</string>
+    <string name="store_action">Store Action</string>
+    <string name="stores_zip_code">Stores Zip Code</string>
     <string name="searching_products_message">Searching Products by each Item ...</string>
     <string name="shop_list_name">Shop List Name</string>
     <string name="search_stores">Search Stores</string>
     <string name="searching_stores_message">Searching Stores by Zip Code ...</string>
     <string name="searched_stores_details">Searched Stores Details</string>
     <string name="favorite_stores_details">Favorite Stores Details</string>
+    <string name="input_shop_list_name">Input Shop List name</string>
     <string name="highest_ratings">Highest Ratings</string>
     <string name="lowest_price">Lowest Price</string>
+    <string name="store_name">Store Name</string>
     <string name="store_address_details">Store Address Details</string>
     <string name="save_settings">Save Settings</string>
     <string name="no_shop_lists_message">No Shop Lists are yet defined.</string>
@@ -48,7 +54,9 @@
     <string name="enter_zip_code_message">Please try another Zip Code.</string>
     <string name="invalid_zip_code">Invalid Zip Code</string>
     <string name="retry_zip_code_message">Zip Code MUST BE 5 digits number. Please try again.</string>
-    <string name="zip_code_by_current_location_message">is the nearest Zip code as per your current location.</string>
+    <string name="zip_code_by_current_location_message">is the nearest Zip Code as per your current location.</string>
+    <string name="select_sort_order_message">Select a Sort Order.</string>
+    <string name="input_limit_value_message">Input a numeric value to a Limit.</string>
 
     <!-- Content Descriptions -->
     <string name="product_image">Product Image</string>

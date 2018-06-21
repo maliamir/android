@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:paddingLeft="@dimen/size_1dp">
+    android:paddingStart="@dimen/size_1dp"
+    android:paddingEnd="@dimen/size_1dp">
 
     <EditText
         android:id="@+id/item_name_attr"
         android:layout_width="@dimen/size_170dp"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/size_10dp"
-        android:text="Input List name" />
+        android:text="@string/input_shop_list_name" />
 
     <EditText
         android:id="@+id/items_limit_attr"

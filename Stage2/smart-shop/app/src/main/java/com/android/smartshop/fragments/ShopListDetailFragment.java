@@ -192,9 +192,7 @@ public class ShopListDetailFragment extends Fragment {
 
                         TableRow tableRow = (TableRow) rowView;
                         String itemName = ((TextView) tableRow.findViewById(R.id.item_name_attr)).getText().toString();
-                        if (itemName.isEmpty()) {
-                            continue;
-                        } else {
+                        if (!itemName.isEmpty()) {
 
                             int checkedRadioButtonId = ((RadioGroup) tableRow.findViewById(R.id.items_sort_order_attr)).getCheckedRadioButtonId();
 

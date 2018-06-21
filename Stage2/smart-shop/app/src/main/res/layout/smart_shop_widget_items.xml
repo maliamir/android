@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/widget_container">
+    android:clickable="true"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/smart_shop_layout"
         android:layout_width="wrap_content"
-        android:layout_gravity="center" android:layout_marginTop="@dimen/size_10dp"
-        android:layout_height="wrap_content" android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/widget_smart_shop_iv"
@@ -32,15 +35,17 @@
     <LinearLayout
         android:id="@+id/widgets_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/size_10dp">
+        android:layout_height="@dimen/size_100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/stores_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical" android:layout_marginStart="@dimen/size_40dp">
+            android:layout_marginStart="@dimen/size_40dp"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/widget_stores_iv"
@@ -52,39 +57,32 @@
             <TextView
                 android:id="@+id/widget_stores"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/size_30dp"
                 android:text="@string/stores"
                 android:textSize="@dimen/text_size_16sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <View
-            android:layout_width="@dimen/size_0dp"
-            android:layout_height="@dimen/size_0dp"
-            android:layout_weight="1" />
-
         <LinearLayout
             android:id="@+id/shop_lists_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/stores_layout"
-            android:orientation="vertical"
-            android:layout_marginEnd="@dimen/size_20dp">
+            android:layout_marginEnd="@dimen/size_20dp"
+            android:layout_marginStart="@dimen/size_40dp"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/widget_shop_lists_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/size_60dp"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/widget_shop_lists"
                 android:contentDescription="@string/shop_lists"
                 android:src="@drawable/shop_lists" />
 
             <TextView
                 android:id="@+id/widget_shop_lists"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/size_30dp"
                 android:text="@string/shop_lists"
                 android:textSize="@dimen/text_size_16sp"
                 android:textStyle="bold" />

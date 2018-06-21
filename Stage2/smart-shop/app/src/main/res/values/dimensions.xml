@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <dimen name="size_0dp">0dp</dimen>
     <dimen name="size_1dp">1dp</dimen>
@@ -24,6 +24,7 @@
     <dimen name="size_100dp">100dp</dimen>
     <dimen name="size_120dp">120dp</dimen>
     <dimen name="size_140dp">140dp</dimen>
+    <dimen name="size_160dp">160dp</dimen>
     <dimen name="size_170dp">170dp</dimen>
     <dimen name="size_260dp">260dp</dimen>
     <dimen name="size_280dp">280dp</dimen>

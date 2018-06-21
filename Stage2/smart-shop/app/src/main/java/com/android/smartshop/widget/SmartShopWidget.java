@@ -1,5 +1,7 @@
 package com.android.smartshop.widget;
 
+import java.util.List;
+
 import android.app.PendingIntent;
 
 import android.content.Context;
@@ -12,6 +14,11 @@ import android.appwidget.AppWidgetProvider;
 
 import android.net.Uri;
 
+import com.android.smartshop.model.Store;
+import com.android.smartshop.model.ShopList;
+
+import com.android.smartshop.service.SmartShopService;
+
 import com.android.smartshop.R;
 
 import com.android.smartshop.activity.MainActivity;
@@ -21,6 +28,21 @@ public class SmartShopWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.smart_shop_widget_items);
+
+        SmartShopService smartShopService = new SmartShopService();
+        List<Store> stores = smartShopService.getStores(context);
+        List<ShopList> shopLists = smartShopService.getShopLists(context);
+
+        remoteViews.setTextViewText(R.id.widget_stores, ("" + stores.size() + " " + context.getString(R.string.stores_info)));
+        remoteViews.setTextViewText(R.id.widget_shop_lists, ("" + shopLists.size() + " " + context.getString(R.string.shop_lists_info)));
+
+        Intent detailsIntent1 = new Intent(context, MainActivity.class);
+        detailsIntent1.putExtra(MainActivity.FRAGMENT_INDEX, 0);
+        remoteViews.setOnClickFillInIntent(R.id.widget_stores, detailsIntent1);
+
+        Intent detailsIntent2 = new Intent(context, MainActivity.class);
+        detailsIntent2.putExtra(MainActivity.FRAGMENT_INDEX, 1);
+        remoteViews.setOnClickFillInIntent(R.id.widget_shop_lists, detailsIntent2);
 
         Intent intent = new Intent(context, WidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);

@@ -73,14 +73,14 @@ public class SettingsFragment extends Fragment {
                 String message = "";
 
                 if (sortOrderNotSelected) {
-                    message = "\n\tSelect a Sort Order.";
+                    message = ("\n\t" + getString(R.string.select_sort_order_message));
                 }
 
 
                 int limit = 1;
                 String limitStr = defaultLimitEditText.getText().toString().trim();
                 if (limitStr.isEmpty()) {
-                    message += "\n\tInput a numeric value to a Limit.";
+                    message += ("\n\t" + getString(R.string.input_limit_value_message));
                 } else {
                     limit = Integer.parseInt(limitStr);
                 }

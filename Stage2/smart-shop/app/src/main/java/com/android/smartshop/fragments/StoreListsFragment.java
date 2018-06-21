@@ -12,10 +12,13 @@ import android.Manifest;
 import android.content.Context;
 
 import android.content.pm.PackageManager;
+
 import android.os.Bundle;
 
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+
+import android.support.v4.content.ContextCompat;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -221,7 +224,8 @@ public class StoreListsFragment extends Fragment {
         stringBuilder.append(store.getState()).append(", ");
         stringBuilder.append(store.getZipCode());
 
-        ((TextView) tableRow.findViewById(R.id.store_name_attr)).setText("    " + (count++) + ". " + store.getName());
+        String storeInfo = ("    " + (count++) + ". " + store.getName());
+        ((TextView) tableRow.findViewById(R.id.store_name_attr)).setText(storeInfo);
         ((TextView) tableRow.findViewById(R.id.store_address_details_attr)).setText(stringBuilder.toString());
 
         table.addView(tableRow);
