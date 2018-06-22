@@ -28,8 +28,8 @@ public abstract class SmartShopDatabase extends RoomDatabase {
     public static SmartShopDatabase getDatabase(Context context) {
 
         if (smartShopDatabase == null) {
-            smartShopDatabase = //Room.databaseBuilder(context, SmartShopDatabase.class, "smart_shop")
-                                Room.inMemoryDatabaseBuilder(context.getApplicationContext(), SmartShopDatabase.class)
+            smartShopDatabase = Room.databaseBuilder(context, SmartShopDatabase.class, "smart_shop")
+                                //Room.inMemoryDatabaseBuilder(context.getApplicationContext(), SmartShopDatabase.class)
                                 // To simplify the exercise, allow queries on the main thread.
                                 // Don't do this on a real app!
                                 .allowMainThreadQueries()

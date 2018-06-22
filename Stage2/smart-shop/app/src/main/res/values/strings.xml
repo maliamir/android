@@ -67,8 +67,8 @@
     <string name="favorite">Mark Store as Favorite</string>
     <string name="unfavorite">Remove Store as Favorite</string>
 
-    <string name="google_services_api_key">AIzaSyC6iroMEuhkcIhaT682Pc8s6Z2tLP1iFWI</string>
-    <string name="app_banner_unit_1_id" translatable="false">ca-app-pub-3265025410386826/1516718739</string>
+    <string name="google_services_api_key">put_your_google_services_api_key_here</string>
+    <string name="app_banner_unit_1_id" translatable="false">put_your_google_ad_mob_unit_id_here</string>
 
     <!--string name="app_banner_unit_1_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string-->
 

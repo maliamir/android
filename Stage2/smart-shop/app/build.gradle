@@ -42,10 +42,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("smart-shop.jks")
-            storePassword "smart-shop-2018"
-            keyAlias "EazyShop"
-            keyPassword "eazy-shop"
+            storeFile file("dummy.jks")
+            storePassword "dummy"
+            keyAlias "dummy"
+            keyPassword "dummy"
         }
     }
 
