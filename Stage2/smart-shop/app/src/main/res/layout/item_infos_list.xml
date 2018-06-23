@@ -2,7 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/size_5dp">
 
@@ -12,12 +12,33 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:textColor="@color/white"
+        android:paddingStart="@dimen/size_5dp"
         android:textSize="@dimen/text_size_16sp"
         android:textStyle="bold" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/found_products_recycler_view"
+    <!--android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"-->
+
+        <!--android.support.v7.widget.RecyclerView
+            android:id="@+id/found_products_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" /-->
+
+    <LinearLayout
+        android:id="@+id/found_products_layout_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
+
+    <!--ListView
+        android:id="@+id/found_products_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" /-->
+
+    <!--/android.support.v4.widget.NestedScrollView-->
 
 </LinearLayout>

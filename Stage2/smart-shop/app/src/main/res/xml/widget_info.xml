@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:configure="com.android.smartshop.widget.WidgetActivity"
+    android:configure="com.maaksoft.smartshop.widget.WidgetActivity"
     android:initialKeyguardLayout="@layout/smart_shop_widget_items"
     android:initialLayout="@layout/smart_shop_widget_items"
     android:minHeight="110dp"

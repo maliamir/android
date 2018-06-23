@@ -25,6 +25,8 @@
     <string name="store">Store:</string>
     <string name="store_action">Store Action</string>
     <string name="stores_zip_code">Stores Zip Code</string>
+    <string name="no_products_found_message">No Products by each Item found in the selected Store.</string>
+    <string name="products_search">Products Search by each Item</string>
     <string name="searching_products_message">Searching Products by each Item ...</string>
     <string name="shop_list_name">Shop List Name</string>
     <string name="search_stores">Search Stores</string>
@@ -38,7 +40,7 @@
     <string name="store_address_details">Store Address Details</string>
     <string name="save_settings">Save Settings</string>
     <string name="no_shop_lists_message">No Shop Lists are yet defined.</string>
-    <string name="no_stores_list_message">To execute a Shop List requires at least 1 Favorite Store.</string>
+    <string name="no_stores_list_message">Executing a Shop List requires at least 1 Favorite Store.</string>
     <string name="no_stores_found_message">Unable to search Stores. Please try again.</string>
     <string name="valid_zip_code_message">Please provide a valid 5 digits Zip Code.</string>
     <string name="item_required_in_shop_list_message">At least 1 Item needs to be added to save a Shop List.</string>
@@ -57,6 +59,8 @@
     <string name="zip_code_by_current_location_message">is the nearest Zip Code as per your current location.</string>
     <string name="select_sort_order_message">Select a Sort Order.</string>
     <string name="input_limit_value_message">Input a numeric value to a Limit.</string>
+    <string name="item_name_required_message">Please provide an Item name.</string>
+    <string name="item_already_added_message">already added in the List.</string>
 
     <!-- Content Descriptions -->
     <string name="product_image">Product Image</string>

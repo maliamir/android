@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.smartshop">
+    package="com.maaksoft.smartshop">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -30,7 +30,7 @@
             android:value="@string/google_services_api_key" />
 
         <activity
-            android:name="com.android.smartshop.activity.MainActivity"
+            android:name="com.maaksoft.smartshop.activity.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,12 +39,12 @@
         </activity>
 
         <activity
-            android:name="com.android.smartshop.activity.ProductsSearchActivity"
+            android:name="com.maaksoft.smartshop.activity.ProductsSearchActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:parentActivityName=".activity.MainActivity" />
 
         <receiver
-            android:name=".widget.SmartShopWidget"
+            android:name="com.maaksoft.smartshop.widget.SmartShopWidget"
             android:icon="@drawable/smart_shop">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -54,14 +54,14 @@
                 android:resource="@xml/widget_info" />
         </receiver>
 
-        <activity android:name=".widget.WidgetActivity">
+        <activity android:name="com.maaksoft.smartshop.widget.WidgetActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
 
         <service
-            android:name=".widget.WidgetService"
+            android:name="com.maaksoft.smartshop.widget.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <!--Include the AdActivity configChanges and theme. -->

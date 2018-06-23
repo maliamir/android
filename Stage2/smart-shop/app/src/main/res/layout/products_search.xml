@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.android.smartshop.activity.ProductsSearchActivity">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.maaksoft.smartshop.activity.ProductsSearchActivity">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="@dimen/size_5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/size_5dp"
+            android:layout_marginEnd="@dimen/size_5dp"
+            android:layout_marginBottom="@dimen/size_10dp">
 
             <TextView
                 android:layout_width="@dimen/size_55dp"
@@ -27,11 +30,21 @@
 
             <Spinner
                 android:id="@+id/favorite_store_lists"
-                android:layout_width="@dimen/size_330dp"
+                android:layout_width="@dimen/size_305dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/size_10dp" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/no_products_found_message_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/transparent"
+            android:text="@string/no_products_found_message"
+            android:textColor="@color/red"
+            android:visibility="gone" />
 
         <RelativeLayout
             android:id="@+id/loading_products_info_rl"
@@ -43,7 +56,8 @@
                 android:id="@+id/products_loading_pb"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_100dp"
-                android:tooltipText="@string/searching_products_message" />
+                android:tooltipText="@string/searching_products_message"
+                tools:targetApi="o" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -55,12 +69,32 @@
 
         </RelativeLayout>
 
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/item_infos_recycler_view"
+        <!--android.support.v7.widget.RecyclerView
+            android:id="@+id/item_infos_view_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" /-->
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:id="@+id/item_infos_view_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!--ListView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent" /-->
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 
-</ScrollView>
+
+</LinearLayout>

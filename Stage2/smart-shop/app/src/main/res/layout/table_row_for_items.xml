@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/items_list_row"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:paddingStart="@dimen/size_1dp"
-    android:paddingEnd="@dimen/size_1dp">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/size_5dp"
+    android:layout_marginStart="@dimen/size_5dp"
+    android:orientation="horizontal">
 
     <EditText
         android:id="@+id/item_name_attr"
-        android:layout_width="@dimen/size_170dp"
+        android:layout_width="@dimen/size_140dp"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/size_10dp"
+        android:paddingStart="@dimen/size_10dp"
         android:text="@string/input_shop_list_name" />
 
     <EditText
         android:id="@+id/items_limit_attr"
-        android:layout_width="@dimen/size_5dp"
+        android:layout_width="@dimen/size_2dp"
         android:layout_height="wrap_content" />
 
     <RadioGroup
         android:id="@+id/items_sort_order_attr"
-        android:layout_width="@dimen/size_140dp"
+        android:layout_width="@dimen/size_110dp"
         android:layout_height="wrap_content"
         android:checkedButton="@+id/highest_ratings_attr">
 
         <RadioButton
             android:id="@+id/highest_ratings_attr"
-            android:layout_width="@dimen/size_140dp"
+            android:layout_width="@dimen/size_110dp"
             android:layout_height="wrap_content"
             android:text="@string/highest_ratings"
-            android:textSize="@dimen/text_size_14sp" />
+            android:textSize="@dimen/text_size_10sp" />
 
         <RadioButton
             android:id="@+id/lowest_price_attr"
-            android:layout_width="@dimen/size_140dp"
+            android:layout_width="@dimen/size_110dp"
             android:layout_height="wrap_content"
             android:text="@string/lowest_price"
-            android:textSize="@dimen/text_size_14sp" />
+            android:textSize="@dimen/text_size_10sp" />
 
     </RadioGroup>
 
@@ -45,8 +45,8 @@
         android:id="@+id/deleteItemBtn"
         android:layout_width="@dimen/size_30dp"
         android:layout_height="@dimen/size_45dp"
-        android:paddingTop="@dimen/size_15dp"
         android:contentDescription="@string/delete_list_item"
+        android:paddingTop="@dimen/size_15dp"
         android:src="@drawable/delete" />
 
 </TableRow>

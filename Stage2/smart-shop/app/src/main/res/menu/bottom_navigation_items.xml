@@ -5,7 +5,7 @@
         android:id="@+id/stores_actions"
         android:contentDescription="@string/favorite_stores"
         android:icon="@drawable/ic_stores"
-        android:tooltipText="@string/shop_lists"
+        android:tooltipText="@string/favorite_stores"
         android:title="@string/favorite_stores" />
 
     <item

@@ -12,7 +12,7 @@
 
         <TextView
             android:id="@+id/store_name_attr"
-            android:layout_width="@dimen/size_345dp"
+            android:layout_width="@dimen/size_300dp"
             android:layout_height="@dimen/size_25dp"
             android:layout_gravity="start"
             android:gravity="start"
@@ -25,7 +25,7 @@
 
         <TextView
             android:id="@+id/store_address_details_attr"
-            android:layout_width="@dimen/size_345dp"
+            android:layout_width="@dimen/size_300dp"
             android:layout_height="@dimen/size_60dp"
             android:layout_gravity="start"
             android:gravity="start"
@@ -35,10 +35,10 @@
 
     </LinearLayout>
 
-    <View
+    <!--View
         android:layout_width="@dimen/size_0dp"
         android:layout_height="@dimen/size_0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1" /-->
 
     <ImageButton
         android:id="@+id/storeActionBtn"
