@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/size_20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/size_10dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/addNewListBtn"
+                android:layout_marginStart="@dimen/size_10dp"
+                android:layout_width="@dimen/size_30dp"
+                android:layout_height="@dimen/size_30dp"
+                android:contentDescription="@string/add_list_item"
+                android:src="@drawable/add_shop_list" />
+
+            <TextView
+                android:id="@+id/message_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingLeft="@dimen/size_10dp"
+                android:paddingRight="@dimen/size_10dp"
+                android:text="@string/no_shop_lists_message"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_14sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <TableLayout
+            android:id="@+id/shop_lists_tbl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/size_10dp"
+            android:layout_marginStart="@dimen/size_10dp"
+            android:visibility="gone">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/cell_border"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/size_170dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/size_5dp"
+                    android:paddingLeft="@dimen/size_10dp"
+                    android:paddingRight="@dimen/size_10dp"
+                    android:paddingTop="@dimen/size_5dp"
+                    android:text="@string/shop_list_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_18sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="@dimen/size_10dp"
+                    android:layout_height="@dimen/size_0dp" />
+
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+
+</ScrollView>

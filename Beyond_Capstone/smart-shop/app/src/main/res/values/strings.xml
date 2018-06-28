@@ -1,0 +1,112 @@
+<resources>
+
+    <string name="app_name">Smart Shop</string>
+
+    <string name="shop_lists">Shop Lists</string>
+    <string name="shop_lists_info">Shop List(s)</string>
+    <string name="shop_list">Shop List</string>
+    <string name="store_lists">Store Lists</string>
+    <string name="items_list">Items List</string>
+    <string name="add_shop_list">Add Shop List</string>
+    <string name="settings">Settings</string>
+
+    <string name="stores">Stores</string>
+    <string name="stores_info">Store(s)</string>
+    <string name="favorite_stores">Favorite Stores</string>
+
+    <string name="favorite_contacts">Contacts</string>
+
+    <string name="save_list">Save List</string>
+    <string name="item_name">Item Name</string>
+    <string name="limit">Limit</string>
+    <string name="sort_order">Sort Order</string>
+    <string name="add_item">Add Item</string>
+    <string name="aisle">Aisle: </string>
+    <string name="price">Price: </string>
+    <string name="rating">Rating: </string>
+    <string name="store">Store:</string>
+    <string name="store_action">Store Action</string>
+    <string name="stores_zip_code">Stores Zip Code</string>
+    <string name="no_products_found_message">No Products by each Item found in the selected Store.</string>
+    <string name="products_search">Products Search by each Item</string>
+    <string name="searching_products_message">Searching Products by each Item ...</string>
+    <string name="shop_list_name">Shop List Name</string>
+    <string name="search_stores">Search Stores</string>
+    <string name="searching_stores_message">Searching Stores by Zip Code ...</string>
+    <string name="searched_stores_details">Searched Stores Details</string>
+    <string name="favorite_stores_details">Favorite Stores Details</string>
+    <string name="input_shop_list_name">Input Shop List name</string>
+    <string name="highest_ratings">Highest Ratings</string>
+    <string name="lowest_price">Lowest Price</string>
+    <string name="store_name">Store Name</string>
+    <string name="store_address_details">Store Address Details</string>
+    <string name="contact">Contact</string>
+    <string name="add_my_contact">Add as My Contact</string>
+    <string name="contact_name">Contact Name</string>
+    <string name="contact_details">Contact Details</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="contact_action">Contact Action</string>
+    <string name="search_contacts">Search Contacts</string>
+    <string name="searching_contacts_message">Searching Contacts by provided Number ...</string>
+    <string name="searched_contacts_details">Searched Contacts Details</string>
+    <string name="my_contacts_details">My Contacts Details</string>
+    <string name="my_contact_removed_message">has been removed successfully as My Contact.</string>
+    <string name="already_added_as_my_contact_message">already added as My Contact.</string>
+    <string name="my_contact_added_message">has been added successfully as My Contact.</string>
+    <string name="remove_my_contact">Remove My Contact.</string>
+    <string name="save_settings">Save Settings</string>
+    <string name="no_shop_lists_message">No Shop Lists are yet defined.</string>
+    <string name="no_stores_list_message">Executing a Shop List requires at least 1 Favorite Store.</string>
+    <string name="no_stores_found_message">Unable to search Stores. Please try again.</string>
+    <string name="no_contacts_found_message">Unable to search Contacts. Please try again.</string>
+    <string name="valid_zip_code_message">Please provide a valid 5 digits Zip Code.</string>
+    <string name="valid_contact_number_message">Please provide a valid Number.</string>
+    <string name="item_required_in_shop_list_message">At least 1 Item needs to be added to save a Shop List.</string>
+    <string name="name_required_for_shop_list_message">Please provide a name to the Shop List.</string>
+    <string name="saved_and_sent_message">has been saved successfully and  sent to</string>
+    <string name="saved_message">has been saved successfully.</string>
+    <string name="favorite_removed_message">has been removed successfully as Favorite Store.</string>
+    <string name="no_network_connection_message">Not Connected to the Network/Internet. Please connect then reload the Screen.</string>
+    <string name="already_added_as_favorite_message">already added as Favorite.</string>
+    <string name="favorite_added_message">has been added successfully as Favorite Store.</string>
+    <string name="unable_to_search_products_message">Unable to search Products by each Item. Please try again.</string>
+    <string name="settings_saved_message">Settings have been saved successfully.</string>
+    <string name="no_stores_found_against_zip_code_message">No Stores found against Zip Code</string>
+    <string name="no_contacts_found_against_contact_number_message">No Contacts found against Contact Number</string>
+    <string name="enter_number_message">Please try another Number.</string>
+    <string name="enter_zip_code_message">Please try another Zip Code.</string>
+    <string name="invalid_zip_code">Invalid Zip Code</string>
+    <string name="retry_zip_code_message">Zip Code MUST BE 5 digits number. Please try again.</string>
+    <string name="zip_code_by_current_location_message">is the nearest Zip Code as per your current location.</string>
+    <string name="select_sort_order_message">Select a Sort Order.</string>
+    <string name="input_limit_value_message">Input a numeric value to a Limit.</string>
+    <string name="item_name_required_message">Please provide an Item name.</string>
+    <string name="item_already_added_message">already added in the List.</string>
+
+    <!-- Content Descriptions -->
+    <string name="product_image">Product Image</string>
+    <string name="delete_list_item">Delete List Item</string>
+    <string name="play_list">Execute List by searching Products by each Item in the List</string>
+    <string name="add_list_item">Add New Shop List</string>
+    <string name="edit_list_item">Edit List</string>
+    <string name="share_list">Share List</string>
+    <string name="updating_sharing">Update Sharing</string>
+    <string name="delete_list">Delete List</string>
+    <string name="favorite">Mark Store as Favorite</string>
+    <string name="unfavorite">Remove Store as Favorite</string>
+
+    <string name="google_services_api_key">dummy</string>
+    <string name="app_banner_unit_1_id" translatable="false">dummy</string>
+
+    <string name="firebase_cloud_messaging_server_key" translatable="false">dummy</string>
+    <string name="firebase_cloud_message_title">Sharing Shop List</string>
+    <string name="firebase_cloud_message_message">Sharing Shop List from the app via Firebase Cloud Message.</string>
+
+    <!--string name="app_banner_unit_1_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string-->
+
+    <string name="notification_add_to_cart_button">Like</string>
+    <string name="group_name">Group 1</string>
+    <string name="notifications_admin_channel_name">Global channel</string>
+    <string name="notifications_admin_channel_description">Notifications sent from the app admin</string>
+
+</resources>

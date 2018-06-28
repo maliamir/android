@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "dummy",
+    "firebase_url": "https://dummy.firebaseio.com",
+    "project_id": "dummy",
+    "storage_bucket": "dummy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:dummy",
+        "android_client_info": {
+          "package_name": "com.android.smartshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "dummy.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "dummy.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "dummy"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
