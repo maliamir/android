@@ -253,10 +253,10 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             ShopList foundShopList = smartShopService.getShopListByName(this, shopList.getName());
             if (foundShopList == null) {
                 shopList.setShopListId(0);
-                message = ("Shop List \"" + shopList.getName() + "\" has been shared by Contact# " + phoneNumber);
+                message = ("Shop List \"" + shopList.getName() + "\" has been shared by Contact# " + senderPhoneNumber);
             } else {
                 shopList.setShopListId(foundShopList.getShopListId());
-                message = ("Shared Shop List \"" + shopList.getName() + "\" has been updated by Contact# " + phoneNumber);
+                message = ("Shared Shop List \"" + shopList.getName() + "\" has been updated by Contact# " + senderPhoneNumber);
             }
 
             smartShopService.addShopList(this, shopList);
@@ -299,7 +299,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 0 /* Request code */, notificationIntent,
                 PendingIntent.FLAG_ONE_SHOT);
 
-        //You should use an actual ID instead
+        //It can be an actual ID instead
         int notificationId = new Random().nextInt(60000);
 
         //Bitmap bitmap = getBitmapfromUrl(remoteDataMap.get("image-url"));
