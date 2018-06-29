@@ -72,17 +72,16 @@ public class SettingsFragment extends Fragment {
                 boolean sortOrderNotSelected = (!highestRatingsRadioButton.isChecked() && !lowestPriceRadioButton.isChecked());
                 String message = "";
 
-                if (sortOrderNotSelected) {
-                    message = ("\n\t" + getString(R.string.select_sort_order_message));
-                }
-
-
                 int limit = 1;
                 String limitStr = defaultLimitEditText.getText().toString().trim();
                 if (limitStr.isEmpty()) {
                     message += ("\n\t" + getString(R.string.input_limit_value_message));
                 } else {
                     limit = Integer.parseInt(limitStr);
+                }
+
+                if (sortOrderNotSelected) {
+                    message += ("\n\t" + getString(R.string.select_sort_order_message));
                 }
 
                 if (message.isEmpty()) {

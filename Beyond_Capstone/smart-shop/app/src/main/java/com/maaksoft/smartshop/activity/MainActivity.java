@@ -3,8 +3,12 @@ package com.maaksoft.smartshop.activity;
 import java.lang.reflect.Field;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import android.Manifest;
+
+import android.accounts.Account;
+import android.accounts.AccountManager;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -22,6 +26,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 
 import android.provider.ContactsContract;
+
 import android.support.annotation.NonNull;
 
 import android.support.design.internal.BottomNavigationItemView;
@@ -59,9 +64,10 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.AdView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
+
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
@@ -72,6 +78,7 @@ import com.maaksoft.smartshop.fragments.StoreListsFragment;
 import com.maaksoft.smartshop.fragments.ShopListsFragment;
 
 import com.maaksoft.smartshop.messaging.FirebaseMessagingService;
+
 import com.maaksoft.smartshop.model.Contact;
 
 import com.maaksoft.smartshop.network.DataReceiver;
@@ -128,14 +135,58 @@ public class MainActivity extends AppCompatActivity {
             try {
 
                 Cursor cursor = getApplication().getContentResolver().query(ContactsContract.Profile.CONTENT_URI, null, null, null, null);
-                if(cursor.getCount() > 0) {
+                if(cursor != null && cursor.getCount() > 0) {
 
-                    cursor.moveToFirst();
-                    this.ownerName = cursor.getString(cursor.getColumnIndex(ContactsContract.Profile.DISPLAY_NAME));
+                    try {
+                        cursor.moveToFirst();
+                        this.ownerName = cursor.getString(cursor.getColumnIndex(ContactsContract.Profile.DISPLAY_NAME));
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                        requestContactsPermission();
+                    }
+
                     System.out.println("ownerName: " + this.ownerName);
 
                 }
                 cursor.close();
+
+                if (this.ownerName == null) {
+                    try {
+                        this.ownerName = EmailFetcher.getName(this);
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                        requestContactsPermission();
+                    }
+                }
+
+                if (this.phoneNumber == null || this.firebaseTokenId == null) {
+                    this.loadPhoneNumber();
+                }
+
+                if (this.phoneNumber != null && this.firebaseTokenId != null) {
+
+                    this.ownerName = ((this.ownerName == null || (this.ownerName = this.ownerName).trim().isEmpty()) ? ("Contact for Phone# " + this.phoneNumber) : this.ownerName);
+                    PreferenceManager.getDefaultSharedPreferences(this).edit().putString(FirebaseMessagingService.OWNER_NAME, this.ownerName).apply();
+
+                    SmartShopService smartShopService = new SmartShopService();
+                    Contact contact = smartShopService.findContactByPhoneNumber(this, this.phoneNumber);
+                    if (contact == null) {
+
+                        contact = new Contact(Contact.SELF, this.phoneNumber, this.firebaseTokenId);
+                        smartShopService.addContact(this, contact);
+
+                        contact = smartShopService.getContactByName(this, Contact.SELF).get(0);
+                        contact.setName(this.ownerName);
+
+                        Firebase.setAndroidContext(this);
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl(FirebaseMessagingService.CONTACTS_FIREBASE_URL);
+                        databaseReference.push().setValue(contact);
+
+                    }
+
+                }
+
+                System.out.println("ownerName: " + this.ownerName);
 
             } catch (Throwable t) {
                 t.printStackTrace();
@@ -146,12 +197,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private String[] permissions = new String[] {
+                                                     Manifest.permission.READ_PHONE_STATE,
+                                                     Manifest.permission.GET_ACCOUNTS,  Manifest.permission.READ_CONTACTS,
+                                                     Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
+                                                };
+
     private boolean requestContactsPermission() {
 
         String permission = Manifest.permission.READ_CONTACTS;
         int grant = ContextCompat.checkSelfPermission(this, permission);
         if (grant != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] { permission }, PERMISSION_REQUEST_ACCESS_CONTACTS);
+            ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_ACCESS_CONTACTS);
             return false;
         } else {
             return true;
@@ -164,9 +221,7 @@ public class MainActivity extends AppCompatActivity {
         String permission = Manifest.permission.READ_PHONE_STATE;
         int grant = ContextCompat.checkSelfPermission(this, permission);
         if (grant != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                                              new String[] { permission, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION },
-                                              PERMISSION_REQUEST_ACCESS_PHONE);
+            ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_ACCESS_PHONE);
             return false;
         } else {
             return true;
@@ -320,16 +375,6 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("Phone Number: " + this.phoneNumber);
                     System.out.println("Firebase Token ID: " + this.firebaseTokenId);
 
-                    contact = new Contact(Contact.SELF, this.phoneNumber, this.firebaseTokenId);
-                    smartShopService.addContact(this, contact);
-
-                    contact = smartShopService.getContactByName(this, Contact.SELF).get(0);
-                    contact.setName(("Contact for Phone " + this.phoneNumber));
-
-                    Firebase.setAndroidContext(this);
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl(FirebaseMessagingService.CONTACTS_FIREBASE_URL);
-                    databaseReference.push().setValue(contact);
-
                 } else {
 
                     contact = contacts.get(0);
@@ -355,11 +400,19 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
 
         System.out.println("onRequestPermissionsResult called with requestCode: " + requestCode);
+        /*
         if (requestCode == PERMISSION_REQUEST_ACCESS_PHONE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             this.loadPhoneNumber();
         } else if (requestCode == PERMISSION_REQUEST_ACCESS_CONTACTS && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             this.loadOwnerName();
         }
+        */
+
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            this.loadPhoneNumber();
+            this.loadOwnerName();
+        }
+
 
     }
 
@@ -369,26 +422,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.loadPhoneNumber();
-        //this.loadOwnerName();
-
-        //String foundKey = FirebaseMessagingService.shareShopList(this, "1203856");
-        //System.out.println("FOUND Key: " + foundKey);
-
-        /*
-        Contact contact = new Contact("Muhammad Ali Amir", this.phoneNumber, this.firebaseTokenId);
-        contact.setShopListContactId(1);
-
-        Firebase.setAndroidContext(this);
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl(FirebaseMessagingService.CONTACTS_FIREBASE_URL);
-        databaseReference.push().setValue(contact);
-        contact.setName("Asma Ahmed");
-        contact.setPhoneNumber("12038562917");
-        contact.setShopListContactId(2);
-        databaseReference.push().setValue(contact);
-        */
-
         ButterKnife.bind(this);
+
+        this.loadPhoneNumber();
+        this.loadOwnerName();
 
         /*
         this.requestSmsPermission();
@@ -465,6 +502,56 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView.getMenu().getItem(fragmentIndex).setChecked(true);
         this.disableShiftMode();
+
+    }
+
+    static class EmailFetcher {
+
+        static Cursor getOwner(Context context) {
+
+            Cursor emailCursor = null;
+            AccountManager accountManager = AccountManager.get(context);
+            Account[] accounts = accountManager.getAccountsByType("com.google");
+            if (accounts.length > 0 && accounts[0].name != null) {
+
+                String accountName = accounts[0].name;
+                System.out.println("Account Name: " + accountName);
+
+                String where = (ContactsContract.CommonDataKinds.Email.DATA + " = ?");
+                ArrayList<String> what = new ArrayList<String>();
+                what.add(accountName);
+                for (int index = 1; index < accounts.length; index++) {
+
+                    where += (" or " + ContactsContract.CommonDataKinds.Email.DATA + " = ?");
+                    what.add(accounts[index].name);
+                    System.out.println("Account[" + index + "] : " + accounts[index].name);
+
+                }
+
+                emailCursor = context.getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, where,
+                                                                 what.toArray(new String[what.size()]), null);
+
+            }
+
+            return emailCursor;
+
+        }
+
+        static String getName(Context context) {
+
+            String name = "";
+            Cursor cursor = getOwner(context);
+            if (cursor != null) {
+
+                if (cursor.moveToNext()) {
+                    name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                }
+
+            }
+
+            return name;
+
+        }
 
     }
 

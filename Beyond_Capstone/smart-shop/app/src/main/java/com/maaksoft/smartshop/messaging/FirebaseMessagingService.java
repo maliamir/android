@@ -71,7 +71,9 @@ import com.maaksoft.smartshop.activity.MainActivity;
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 
     public static final String CONTACTS_FIREBASE_URL = (BuildConfig.FIREBASE_REALTIME_DATABASE_URL + "/contacts");
+
     public static final String FIREBASE_TOKEN = "FIREBASE_TOKEN";
+    public static final String OWNER_NAME = "ownerName";
     public static final String PHONE_NUMBER = "phoneNumber";
     public static final String KEY = "key";
     public static final String NAME = "name";
@@ -155,6 +157,10 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         senderPhoneNumber = PreferenceManager.getDefaultSharedPreferences(context).getString(PHONE_NUMBER, senderPhoneNumber);
         System.out.println("Sender Phone Number: " + senderPhoneNumber);
 
+        String senderOwnerName = ("Contact for Phone " + senderPhoneNumber);
+        senderOwnerName = PreferenceManager.getDefaultSharedPreferences(context).getString(OWNER_NAME, senderOwnerName);
+        System.out.println("Sender Owner Name: " + senderOwnerName);
+
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
         objectOutputStream.writeObject(shopList);
@@ -166,6 +172,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         dataJsonObject.put(MESSAGE, context.getString(R.string.firebase_cloud_message_message));
         dataJsonObject.put(PHONE_NUMBER, phoneNumber);
         dataJsonObject.put(SENDER_PHONE_NUMBER, senderPhoneNumber);
+        dataJsonObject.put(OWNER_NAME, senderOwnerName);
         dataJsonObject.put(SENDER_KEY, firebaseTokenId);
         dataJsonObject.put(SHOP_LIST_CONTENT, shopListStr);
 
@@ -219,6 +226,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         String message = remoteDataMap.get(MESSAGE);
         String phoneNumber = remoteDataMap.get(PHONE_NUMBER);
         String senderPhoneNumber = remoteDataMap.get(SENDER_PHONE_NUMBER);
+        String senderOwnerName = remoteDataMap.get(OWNER_NAME);
         String senderKey = remoteDataMap.get(SENDER_KEY);
         String shopListContent = remoteDataMap.get(SHOP_LIST_CONTENT);
         System.out.println("title: " + title);
@@ -261,7 +269,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
                 System.out.println("Contact NOT FOUND");
 
-                contact = new Contact(("Contact for Phone " + senderPhoneNumber), senderPhoneNumber, senderKey);
+                contact = new Contact(senderOwnerName, senderPhoneNumber, senderKey);
                 smartShopService.addContact(this, contact);
                 contact = smartShopService.findContactByPhoneNumber(this, senderPhoneNumber);
                 linkShopList = true;
