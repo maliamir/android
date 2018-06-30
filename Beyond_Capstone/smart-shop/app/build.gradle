@@ -23,8 +23,8 @@ android {
         applicationId "com.maaksoft.smartshop"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 12
-        versionName "1.0.11"
+        versionCode 16
+        versionName "1.0.15"
 
         multiDexEnabled true
 

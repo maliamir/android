@@ -233,6 +233,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         System.out.println("message: " + message);
         System.out.println("phoneNumber: " + phoneNumber);
         System.out.println("senderKey: " + senderKey);
+        System.out.println("senderPhoneNumber: " + senderPhoneNumber);
+        System.out.println("senderOwnerName: " + senderOwnerName);
         System.out.println("shopListContent: " + shopListContent);
 
         ShopList shopList = null;
@@ -249,14 +251,15 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         if (shopList != null) {
 
+            String messagePart = (" by Contact: " + senderOwnerName + " (" + senderPhoneNumber + ").");
             SmartShopService smartShopService = new SmartShopService();
             ShopList foundShopList = smartShopService.getShopListByName(this, shopList.getName());
             if (foundShopList == null) {
                 shopList.setShopListId(0);
-                message = ("Shop List \"" + shopList.getName() + "\" has been shared by Contact# " + senderPhoneNumber);
+                message = ("Shop List \"" + shopList.getName() + "\" has been shared" + messagePart);
             } else {
                 shopList.setShopListId(foundShopList.getShopListId());
-                message = ("Shared Shop List \"" + shopList.getName() + "\" has been updated by Contact# " + senderPhoneNumber);
+                message = ("Shared Shop List \"" + shopList.getName() + "\" has been updated" + messagePart);
             }
 
             smartShopService.addShopList(this, shopList);
