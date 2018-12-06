@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Baking App</string>
+    <string name="appwidget_text">Baking App</string>
+    <string name="add_recipe">Add Recipe</string>
+    <string name="pick_a_recipe">Pick a Recipe</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="scroll_up">(Scroll Up)</string>
+    <string name="steps">Steps</string>
+    <string name="reload_connection">Reload Connection</string>
+</resources>

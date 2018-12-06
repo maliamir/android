@@ -1,0 +1,13 @@
+<resources>
+    <!-- detail -->
+    <dimen name="detail_title_text_size">32sp</dimen>
+    <dimen name="detail_body_text_size">18sp</dimen>
+    <dimen name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.15</dimen>
+
+    <dimen name="fab_elevation">6dp</dimen>
+    <dimen name="fab_press_translation_z">6dp</dimen>
+    <dimen name="fab_margin">24dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="appbar_elevation">4dp</dimen>
+
+</resources>

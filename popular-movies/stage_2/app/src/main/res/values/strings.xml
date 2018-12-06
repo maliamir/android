@@ -1,0 +1,36 @@
+<resources>
+
+    <string name="app_name">Popular Movies</string>
+    <string name="top_rated_movies">Top Rated Movies</string>
+    <string name="favorite_movies">Favorite Movies</string>
+    <string name="load_more_movies">Load More Movies</string>
+
+    <!-- Detail Activity-->
+    <string name="detail_also_known_as_label">Also known as:</string>
+    <string name="detail_place_of_origin_label">Place of origin:</string>
+    <string name="detail_description_label">Description:</string>
+    <string name="detail_ingredients_label">Ingredients:</string>
+
+    <!-- Content description-->
+    <string name="movie_poster_description">Movie Poster</string>
+
+    <string name="movie_original_title">Original Title</string>
+    <string name="movie_plot_synopsis">Plot Synopsis</string>
+    <string name="movie_average_vote">Average Vote</string>
+    <string name="movie_release_date">Release Date</string>
+
+    <string name="trailers">Trailers</string>
+    <string name="movie_trailer">Movie Trailer</string>
+
+    <string name="reviews">Reviews</string>
+    <string name="by">by&#160;</string>
+
+    <string name="favorite">Favorite</string>
+    <string name="unfavorite">Unfavorite</string>
+    <string name="mark_favorite">Marked as Favorite</string>
+    <string name="remove_unfavorite">Removed as Favorite</string>
+
+    <!-- Error messages-->
+    <string name="detail_error_message">Movie data not available</string>
+
+</resources>

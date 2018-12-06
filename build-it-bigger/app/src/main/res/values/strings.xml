@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Build it Bigger</string>
+    <string name="computer_joke">Computer Joke!</string>
+    <string name="normal_joke">Normal joke!</string>
+    <string name="action_settings">Settings</string>
+    <string name="jokeEnvelope" />
+</resources>

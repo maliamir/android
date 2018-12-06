@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="column_width">100dp</dimen>
+    <dimen name="image_layout_width">80dp</dimen>
+    <dimen name="poster_image_width">230dp</dimen>
+
+    <dimen name="square_dimensions_size">50dp</dimen>
+
+    <dimen name="size_10_dp">10dp</dimen>
+    <dimen name="size_20_dp">20dp</dimen>
+    <dimen name="size_100_dp">100dp</dimen>
+    <dimen name="size_200_dp">200dp</dimen>
+    <dimen name="size_300_dp">300dp</dimen>
+
+    <dimen name="text_size">10sp</dimen>
+    <dimen name="big_text_size">12sp</dimen>
+    <dimen name="bigger_text_size">14sp</dimen>
+
+</resources>

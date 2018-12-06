@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">JokeFactory</string>
+    <string name="jokeEnvelope" />
+    <string name="joke_retrieve_error">We cant find the joke oops!</string>
+    <string name="share_joke">Share Joke</string>
+</resources>
